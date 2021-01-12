@@ -1,0 +1,7 @@
+{
+  "name": "text-recognition",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
