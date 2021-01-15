@@ -47,11 +47,15 @@ class Model(Resource):
     def get(self):
         return {'data': config}, 200  # return data and 200 OK code
 
-        # not in json format :(
 
- 
-    
+class Model2(Resource):
+    # methods go here
+    def get(self):
+        return {'data': eval_accuracy}, 200  # return data and 200 OK code
+
+
 api.add_resource(Model, '/model')  
+api.add_resource(Model2, '/model2')  
 
 if __name__ == '__main__':
     app.run()  # run our Flask app
