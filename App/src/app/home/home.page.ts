@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { PhotoService } from '../services/photo.service';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-home',
@@ -8,9 +9,16 @@ import { PhotoService } from '../services/photo.service';
 })
 export class HomePage {
 
-  constructor(public photoService: PhotoService) { }
+  constructor(public photoService: PhotoService, private apiService: ApiService ) { }
 
   addPhotoToGallery() {
     this.photoService.addNewToGallery();
+  }
+
+  getModel() {
+    this.apiService.getData().subscribe(data => {
+      console.log(data);
+    });
+
   }
 }
