@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 // const API_URL = environment.apiUrl;
-const API_URL = 'http://127.0.0.1:5000/model';
+const API_URL = 'http://127.0.0.1:5000';
 
 @Injectable({
   providedIn: 'root'
