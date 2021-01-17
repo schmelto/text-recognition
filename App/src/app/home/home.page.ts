@@ -11,8 +11,9 @@ export class HomePage {
 
   constructor(public photoService: PhotoService, private apiService: ApiService ) { }
 
-  addPhotoToGallery() {
+  takePhoto() {
     this.photoService.addNewToGallery();
+    
   }
 
   getModel() {
@@ -20,5 +21,9 @@ export class HomePage {
       console.log(data);
     });
 
+  }
+
+  sendData() {
+    this.photoService.sendData();
   }
 }

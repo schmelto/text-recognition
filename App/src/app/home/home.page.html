@@ -8,7 +8,7 @@
 
 <ion-content>
   <ion-fab vertical="bottom" horizontal="center" slot="fixed">
-    <ion-fab-button (click)="addPhotoToGallery()">
+    <ion-fab-button (click)="takePhoto()">
       <ion-icon name="camera"></ion-icon>
     </ion-fab-button>
   </ion-fab>
@@ -30,4 +30,7 @@
 
 <ion-fab-button (click)="getModel()">
   <ion-icon name="home"></ion-icon>
+</ion-fab-button>
+<ion-fab-button (click)="sendData()">
+  <ion-icon name="send"></ion-icon>
 </ion-fab-button>

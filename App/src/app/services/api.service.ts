@@ -14,4 +14,9 @@ export class ApiService {
   getData() {
     return this.http.get(`${API_URL}/model`);
   }
+
+  sendData(data) {
+    console.log(data);
+    return this.http.post<any>(`${API_URL}/model`, data);
+  }
 }
