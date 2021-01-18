@@ -47,27 +47,12 @@ CORS(app)
 api = Api(app)
 
 
-class Model(Resource):
-    # methods go here
-    def get(self):
-        return {'data': config}, 200  # return data and 200 OK code
+@app.route('/model', methods=('POST',))
+def post():
+    filepath = request.args.get('filepath') #if key doesn't exist, returns None
+    webviewPath = request.args['webviewPath'] #if key doesn't exist, returns a 400, bad request error
     
-    def post(self):
-        parser = reqparse.RequestParser()  # initialize
-        
-        parser.add_argument('filepath', required=True)  # add args
-        parser.add_argument('webviewPath', required=True)
-        
-        args = parser.parse_args()  # parse arguments to dictionary
-        
-        # create new dataframe containing new values
-        new_data = pd.DataFrame({
-            'filepath': args['filepath'],
-            'webviewPath': args['webviewPath'],
-        })
-        return {'data': new_data}, 200  # return data with 200 OK
-
-api.add_resource(Model, '/model')  
+    return jsonify(webviewPath), 200  # return data with 200 OK
 
 
 if __name__ == '__main__':

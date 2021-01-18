@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 // const API_URL = environment.apiUrl;
 const API_URL = 'http://127.0.0.1:5000';
@@ -15,8 +16,19 @@ export class ApiService {
     return this.http.get(`${API_URL}/model`);
   }
 
-  sendData(data) {
-    console.log(data);
-    return this.http.post<any>(`${API_URL}/model`, data);
+  // sendData(data) {
+  //   console.log(data);
+  //   return this.http.post<any>(`${API_URL}/model`, data);
+  // }
+
+  public sendData(object: Photo): Observable<Photo> {
+    console.log(object);
+    return this.http.post<Photo>(`${API_URL}/model`, object[0]); //TODO
   }
+
+}
+
+export interface Photo {
+  filepath: string;
+  webviewPath: string;
 }
