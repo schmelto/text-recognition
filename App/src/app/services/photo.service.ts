@@ -28,7 +28,7 @@ export class PhotoService {
   }
 
   public async sendData(){
-    this.apiService.sendData(this.photos).subscribe(data => {
+    this.apiService.sendData(this.photos[0]).subscribe(data => {
       console.log(data);
     });
   }

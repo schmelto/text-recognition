@@ -49,7 +49,7 @@ api = Api(app)
 
 @app.route('/model', methods=('POST',))
 def post():
-    filepath = request.args.get('filepath') #if key doesn't exist, returns None
+    # filepath = request.args.get('filepath') #if key doesn't exist, returns None
     webviewPath = request.args['webviewPath'] #if key doesn't exist, returns a 400, bad request error
     
     return jsonify(webviewPath), 200  # return data with 200 OK

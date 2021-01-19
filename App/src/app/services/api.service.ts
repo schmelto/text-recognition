@@ -23,7 +23,7 @@ export class ApiService {
 
   public sendData(object: Photo): Observable<Photo> {
     console.log(object);
-    return this.http.post<Photo>(`${API_URL}/model`, object[0]); //TODO
+    return this.http.post<Photo>(`${API_URL}/model?webviewPath=${object.webviewPath}`, object); //TODO
   }
 
 }
