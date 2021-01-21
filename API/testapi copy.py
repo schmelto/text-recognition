@@ -1,5 +1,6 @@
 # https://towardsdatascience.com/the-right-way-to-build-an-api-with-python-cd08ab285f8f
-
+from PIL import Image
+from urllib.request import urlopen
 from flask import Flask, jsonify
 from flask_restful import Resource, Api, reqparse
 import pandas as pd
@@ -12,6 +13,11 @@ import tensorflow as tf
 from tensorflow import keras
 import numpy as np
 import matplotlib.pyplot as plt
+
+
+import pathlib
+
+
 
 data = keras.datasets.mnist
 (train_images, train_labels), (test_images, test_labels) = data.load_data()
@@ -35,7 +41,7 @@ model.compile(
     loss='mean_squared_error',
     metrics=['accuracy'])
 
-model.fit(train_images, train_vec_labels, epochs=10, verbose=True)
+# model.fit(train_images, train_vec_labels, epochs=10, verbose=True)
 
 eval_loss, eval_accuracy = model.evaluate(test_images, test_vec_labels, verbose=False)
 print("Model accuracy: %.2f" % eval_accuracy)
@@ -52,6 +58,8 @@ def post():
     # filepath = request.args.get('filepath') #if key doesn't exist, returns None
     webviewPath = request.args['webviewPath'] #if key doesn't exist, returns a 400, bad request error
     
+    img = Image.open(urlopen(webviewPath))
+
     return jsonify(webviewPath), 200  # return data with 200 OK
 
 
