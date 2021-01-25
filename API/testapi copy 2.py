@@ -1,13 +1,8 @@
-# https://towardsdatascience.com/the-right-way-to-build-an-api-with-python-cd08ab285f8f
-from PIL import Image
-from urllib.request import urlopen
+
 from flask import Flask, jsonify
 from flask_restful import Resource, Api, reqparse
 import pandas as pd
-import ast
-from flask_cors import CORS
-from flask import request
-from flask import abort
+
 
 import tensorflow as tf
 from tensorflow import keras
@@ -38,36 +33,18 @@ model.compile(
     loss='mean_squared_error',
     metrics=['accuracy'])
 
-model.fit(train_images, train_vec_labels, epochs=10, verbose=True)
+model.fit(train_images, train_vec_labels, epochs=2, verbose=True)
 
 eval_loss, eval_accuracy = model.evaluate(test_images, test_vec_labels, verbose=False)
 print("Model accuracy: %.2f" % eval_accuracy)
 
 config = model.to_json()
 
-app = Flask(__name__)
-CORS(app)
-api = Api(app)
+img1 = 'C:/Users/tomsc/Downloads/img_1.jpg'
 
+img2 = tf.keras.preprocessing.image.img_to_array(
+img1, data_format=None, dtype=None
+)
 
-@app.route('/model', methods=('POST',))
-def post():
-    # filepath = request.args.get('filepath') #if key doesn't exist, returns None
-    webviewPath = request.args['webviewPath'] #if key doesn't exist, returns a 400, bad request error
-    
-    # img1 = Image.open(urlopen(webviewPath))
-    img1 = 'C:/Users/tomsc/Downloads/img_1.jpg'
-
-    img2 = tf.keras.preprocessing.image.img_to_array(
-    img1, data_format=None, dtype=None
-    )
-
-    prediction = model.predict(img2)
-    print(prediction)
-
-
-    return jsonify(webviewPath), 200  # return data with 200 OK
-
-
-if __name__ == '__main__':
-    app.run()  # run our Flask app
+prediction = model.predict(img2)
+print(prediction)
